@@ -1,0 +1,2 @@
+# MineralContest-bedrock-editon
+ 
