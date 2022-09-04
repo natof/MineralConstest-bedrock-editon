@@ -1,6 +1,7 @@
 import * as GameTest from "mojang-gametest";
 import { Items, ItemStack, Player, World, world, Location} from "mojang-minecraft";
 import {addPlayerInTeam, teams, getPlayerTeam, getSpawnLocationTeam} from "./managers/TeamManager.js";
+import { calculePointInChest } from "./managers/ChestManager.js";
 
 var isStart = false;
 var timer = {};
@@ -75,9 +76,15 @@ world.events.tick.subscribe(() => {
                 case 4: 
                     world.getDimension("overworld").runCommand(`title @a title Go !!`)
                     world.getDimension("overworld").runCommand(`playsound mob.enderdragon.growl @a`)
-
-                   
                 break;        
+            }
+
+            switch(timer.minute){
+                case 0:
+                    isStart = false;
+                    calculePointInChest();
+                    world.getDimension("overworld").runCommand(`red ${teams.redPoint}`)
+                break;
             }
 
             world.getDimension("overworld").runCommand(`scoreboard players set "Temps Restant   " mineralcontest 10`)
@@ -124,6 +131,7 @@ world.events.playerJoin.subscribe((event) => {
 })
 
 world.events.worldInitialize.subscribe((event) => {
+    world.getDimension("overworld").runCommand(`scoreboard objectives add teams dummy §6Tea§bm§r`)
     world.getDimension("overworld").runCommand(`scoreboard objectives remove teams`)
     world.getDimension("overworld").runCommand(`scoreboard objectives add teams dummy §6Tea§bm§r`)
     world.getDimension("overworld").runCommand(`scoreboard objectives setdisplay sidebar teams`)
@@ -142,6 +150,9 @@ world.events.beforeChat.subscribe((event) => {
         isStart = true;
     }else if(event.message == "!stop"){
         isStart = false;
+    }else if (event.message == "!time"){
+        calculePointInChest();
+        world.getDimension("overworld").runCommand(`say red ${teams.redPoint}`)
     }
 
 })

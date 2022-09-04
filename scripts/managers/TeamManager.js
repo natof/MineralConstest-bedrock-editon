@@ -1,5 +1,5 @@
 import * as GameTest from "mojang-gametest";
-import { Items, ItemStack, Player, World, world, Location} from "mojang-minecraft";
+import { Items, ItemStack, Player, World, world, Location, BlockLocation} from "mojang-minecraft";
 
 export var teams = {};
 teams["red"] = [];
@@ -11,6 +11,16 @@ teams["bluePosition"] = new Location(-17.37, -60.00, 30.44);
 teams["redPosition"] = new Location(-6.56, -60.00, 19.48);
 teams["yellowPosition"] = new Location(4.00, -60.00, 30.59);
 teams["greenPosition"] = new Location(-6.57, -60.00, 41.39);
+
+teams["blueChestPosition"] = new BlockLocation(-21, -59, 30);
+teams["redChestPosition"] = new BlockLocation(-7, -59, 16);
+teams["yellowChestPosition"] = new BlockLocation(7, -59, 30);
+teams["greenChestPosition"] = new BlockLocation(-7, -59, 44);
+
+teams["bluePoint"] = 0;
+teams["redPoint"] = 0;
+teams["yellowPoint"] = 0;
+teams["greenPoint"] = 0;
 
 export function addPlayerInTeam(player, color) {
     removePlayerInTeam(player);
