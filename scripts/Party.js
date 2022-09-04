@@ -3,7 +3,7 @@ import { Items, ItemStack, Player, World, world, Location} from "mojang-minecraf
 import {addPlayerInTeam, teams, getPlayerTeam, getSpawnLocationTeam} from "./managers/TeamManager.js";
 import { calculePointInChest } from "./managers/ChestManager.js";
 
-var isStart = false;
+export var isStart = false;
 var timer = {};
 timer["party"] = 0
 timer["minute"] = 60
@@ -122,7 +122,7 @@ world.events.playerJoin.subscribe((event) => {
         yellowWool.nameTag = "§r§eYellow Team§r§f\n" + teams.yellow.join("\n")
         inventory.setItem(7, yellowWool);
 
-        if(player.name == "Naatof" || player.name == "Achedon"){
+        if(player.name == "Naatof" || player.name == "Achedon12"){
             var compass = new ItemStack(Items.get(`compass`), 1, 4);
             compass.nameTag = "§r§aStart party§f";
             inventory.setItem(8, compass);
